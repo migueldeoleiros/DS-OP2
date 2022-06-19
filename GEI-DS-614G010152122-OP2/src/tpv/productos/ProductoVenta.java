@@ -16,4 +16,11 @@ public abstract class ProductoVenta extends Producto {
         this.impuestos = impuestos;
     }
 
+    @Override
+    public String toString() {
+        return getNombre() + "\t" +
+                getCantidad() + "\t" +
+                getPrecio()+getPrecio()*impuestos + "\t" +
+                (getPrecio()+getPrecio()*impuestos)*getCantidad();
+    }
 }
