@@ -2,21 +2,13 @@ package tpv.productos;
 
 import tpv.Producto;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
-public class ProductoMultiple extends Producto {
-    private double impuestos = 0.10;
-    Map<Producto, Integer> listaIngredentes;
-    public ProductoMultiple(String nombre, String descripcion, double precio, Map<Producto, Integer> listaIngredentes) {
-        super(nombre, descripcion, precio);
+public class ProductoMultiple extends ProductoVenta {
+    List<Producto> listaIngredentes;
+    public ProductoMultiple(String nombre, String descripcion, double precio, List<Producto> listaIngredentes, int cantidad) {
+        super(nombre, descripcion, precio, cantidad);
         this.listaIngredentes = listaIngredentes;
     }
 
-    public double getImpuestos() {
-        return impuestos;
-    }
-    public void setImpuestos(double impuestos) {
-        this.impuestos = impuestos;
-    }
 }

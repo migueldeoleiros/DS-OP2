@@ -1,11 +1,15 @@
 package tpv;
 
+import java.util.Objects;
+
 public abstract class Producto {
+    private int cantidad;
     private String nombre;
     private String descripcion;
     private double precio;
 
-    public Producto(String nombre, String descripcion, double precio) {
+    public Producto(String nombre, String descripcion, double precio, int cantidad) {
+        this.cantidad = cantidad;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
@@ -28,5 +32,25 @@ public abstract class Producto {
     }
     public void setPrecio(double precio) {
         this.precio = precio;
+    }
+    public int getCantidad() {
+        return cantidad;
+    }
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Producto producto)) return false;
+        return Double.compare(producto.precio, precio) == 0 &&
+                              nombre.equals(producto.nombre) &&
+                              Objects.equals(descripcion, producto.descripcion);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, descripcion, precio);
     }
 }
