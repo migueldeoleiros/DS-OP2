@@ -1,20 +1,38 @@
 package tpv;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class Despensa {
-    HashMap<Producto, Integer> productos = new HashMap<>();
+    List<Producto> productos = new ArrayList<>();
 
-    public void addProducto(Producto producto, int cantidad){
-        this.productos.put(producto,cantidad);
+    public void addProducto(Producto producto){
+        this.productos.add(producto);
     }
 
-    public boolean removeProducto(Producto producto, int cantidad){
-        int oldCantidad = this.productos.get(producto);
-        if(oldCantidad-cantidad > 0){
-            this.productos.replace(producto, oldCantidad-cantidad);
-            return true;
-        }else return false;
+    public void removeProducto(Producto producto){
+        this.productos.remove(producto);
+    }
+
+    public boolean incrementarProducto(Producto producto, int cantidad){
+        for(Producto i : this.productos)
+            if(Objects.equals(i, producto)){
+                i.setCantidad(i.getCantidad()+cantidad);
+                return true;
+            }
+        return false;
+    }
+
+    public boolean decrementarProducto(Producto producto, int cantidad){
+        for(Producto i : this.productos)
+            if(Objects.equals(i, producto)) {
+                if(i.getCantidad()-cantidad > 0){
+                    i.setCantidad(i.getCantidad() - cantidad);
+                    return true;
+                }else break;
+            }
+        return false;
     }
 
 }

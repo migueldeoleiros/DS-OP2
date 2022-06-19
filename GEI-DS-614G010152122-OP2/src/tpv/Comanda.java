@@ -1,13 +1,16 @@
 package tpv;
 
 import tpv.estadosComanda.Pedir;
+import tpv.productos.ProductoVenta;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Comanda {
     private int mesa;
     private Despensa despensa;
-    private HashMap<Producto, Integer> pedidos = new HashMap<>();
+    private List<ProductoVenta> pedidos = new ArrayList<>();
     private Estado estado = Pedir.getInstance();
 
     public Comanda(int mesa, Despensa despensa) {
@@ -26,6 +29,7 @@ public class Comanda {
     public String solicitarCuenta(){
         return this.estado.solicitarCuenta(this);
     }
+
     public String pagar(){
         return this.estado.pagar(this);
     }
@@ -43,10 +47,10 @@ public class Comanda {
     public void setDespensa(Despensa despensa) {
         this.despensa = despensa;
     }
-    public HashMap<Producto, Integer> getPedidos() {
+    public List<ProductoVenta> getPedidos() {
         return pedidos;
     }
-    public void setPedidos(HashMap<Producto, Integer> pedidos) {
+    public void setPedidos(List<ProductoVenta> pedidos) {
         this.pedidos = pedidos;
     }
 }

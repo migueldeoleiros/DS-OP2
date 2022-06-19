@@ -1,10 +1,13 @@
 package tpv;
 
+import tpv.productos.ProductoVenta;
+
 public interface Estado {
 
-    default String pedir(Comanda c, Producto pedido, int cantidad) {
-        return null;
+    default boolean pedir(Comanda c, ProductoVenta pedido){
+        return false;
     }
+
     default String solicitarCuenta(Comanda c){
         return null;
     }

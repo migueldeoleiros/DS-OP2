@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurante {
-    Despensa despensa;
-    List<Comanda> comandas;
+    private Despensa despensa;
+    private List<Comanda> comandas;
 
     public Restaurante(Despensa despensa) {
         this.despensa = despensa;
@@ -18,5 +18,18 @@ public class Restaurante {
 
     public String cerrarCaja() {
         return null;
+    }
+
+    public Despensa getDespensa() {
+        return despensa;
+    }
+    public void setDespensa(Despensa despensa) {
+        this.despensa = despensa;
+    }
+    public List<Comanda> getComandas() {
+        return comandas;
+    }
+    public void setComandas(List<Comanda> comandas) {
+        this.comandas = comandas;
     }
 }
