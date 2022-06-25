@@ -22,8 +22,8 @@ public class Comanda {
         this.estado = estado;
     }
 
-    public void pedir(Producto producto, int cantidad){
-        estado.pedir(this, producto, cantidad);
+    public void pedir(ProductoVenta producto, int cantidad){
+        estado.pedir(this, producto);
     }
 
     public String solicitarCuenta(){

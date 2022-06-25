@@ -3,12 +3,12 @@ package tpv;
 import java.util.Objects;
 
 public abstract class Producto {
-    private int cantidad;
+    private double cantidad;
     private String nombre;
     private String descripcion;
     private double precio;
 
-    public Producto(String nombre, String descripcion, double precio, int cantidad) {
+    public Producto(String nombre, String descripcion, double precio, double cantidad) {
         this.cantidad = cantidad;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -33,10 +33,10 @@ public abstract class Producto {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-    public int getCantidad() {
+    public double getCantidad() {
         return cantidad;
     }
-    public void setCantidad(int cantidad) {
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
 
