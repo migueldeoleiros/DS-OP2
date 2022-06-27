@@ -26,15 +26,15 @@ public class Despensa {
         return false;
     }
 
-    //TODO cambiar getClass
-    public boolean decrementarProducto(Producto producto, double cantidad){
-        if(producto.getClass() == ProductoMultiple.class){
-            for(Producto i : ((ProductoMultiple) producto).getListaIngredientes())
-                decrementarProducto(i,i.getCantidad()*producto.getCantidad());
+    public boolean decrementarProducto(Producto producto, double cantidad) {
+        if(producto.getCantidad() == -1){
+            for(Producto i :  ((ProductoMultiple) producto).getListaIngredientes())
+                if(!decrementarProducto(i, i.getCantidad() * cantidad)) return false;
+            return true;
         }
         for(Producto i : this.productos)
-            if(Objects.equals(i, producto)) {
-                if(i.getCantidad()-cantidad > 0){
+            if(i.equals(producto)) {
+                if(i.getCantidad() - cantidad > 0){
                     i.setCantidad(i.getCantidad() - cantidad);
                     return true;
                 }else break;

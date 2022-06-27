@@ -4,7 +4,6 @@ import tpv.estadosComanda.Pedir;
 import tpv.productos.ProductoVenta;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Comanda {
@@ -22,8 +21,8 @@ public class Comanda {
         this.estado = estado;
     }
 
-    public void pedir(ProductoVenta producto, int cantidad){
-        estado.pedir(this, producto);
+    public boolean pedir(ProductoVenta producto){
+        return estado.pedir(this, producto);
     }
 
     public String solicitarCuenta(){
