@@ -37,7 +37,7 @@ class tpvTest {
     @Test
     void testPedir() {
         testDespensa();
-        Ingrediente quesoB = new Ingrediente("queso", "queso en loncha", 7, 0.150);
+        Ingrediente quesoB = new Ingrediente("queso", "queso en loncha", 7, 0.2);
         Ingrediente panB = new Ingrediente("pan", "pan para bocadillos", 1.50, 1);
 
         //comprueba que el equals de los productos es correcto
@@ -53,15 +53,13 @@ class tpvTest {
         List<Producto> listaBocadillo = new ArrayList<>();
         listaBocadillo.add(quesoB);
         listaBocadillo.add(panB);
-        ProductoMultiple bocadillo = new ProductoMultiple("bocadillo", "bocadillo de queso", listaBocadillo, 3.50, 0.10);
-        despensa.addProducto(panB);
+        ProductoMultiple bocadillo = new ProductoMultiple("bocadillo", "bocadillo de queso", listaBocadillo, 3.50, 0.10, 1);
 
         ProductoIndividual aguaM = new ProductoIndividual("agua", "botella de 1 litro de agua", 1, 1);
         List<Producto> listaMenu = new ArrayList<>();
         listaMenu.add(bocadillo);
         listaMenu.add(aguaM);
-        ProductoMultiple menu = new ProductoMultiple("menu", "menu de bocadillo con agua", listaMenu, 0.85);
-        despensa.addProducto(menu);
+        ProductoMultiple menu = new ProductoMultiple("menu", "menu de bocadillo con agua", listaMenu, 0.85, 1);
 
         for (Producto producto : despensa.getProductos()) {
             if(producto.equals(aguaM))
@@ -81,8 +79,8 @@ class tpvTest {
                 assertEquals(20, producto.getCantidad());
             else if(producto.equals(panB))
                 assertEquals(4, producto.getCantidad());
-//            else if(producto.equals(quesoB))
-//                assertEquals(4.85, producto.getCantidad());
+            else if(producto.equals(quesoB))
+                assertEquals(4.8, producto.getCantidad());
         }
 
         assertTrue(comanda.pedir(menu));
@@ -93,12 +91,13 @@ class tpvTest {
             else if(producto.equals(panB))
                 assertEquals(3, producto.getCantidad());
             else if(producto.equals(quesoB))
-                assertEquals(4.7, producto.getCantidad());
+                assertEquals(4.6, producto.getCantidad());
         }
 
     }
     @Test
     void testCuenta() {
-        assertEquals("", restaurante.getComandas().get(1).solicitarCuenta());
+        testPedir();
+        assertEquals("", restaurante.getComandas().get(0).solicitarCuenta());
     }
 }
