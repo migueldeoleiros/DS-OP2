@@ -1,14 +1,15 @@
 package tpv;
 
 import org.junit.jupiter.api.Test;
+import tpv.estadosComanda.Cancelado;
+import tpv.estadosComanda.Impagado;
 import tpv.metodosPago.*;
 import tpv.productos.*;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class tpvTest {
     Despensa despensa = new Despensa();
@@ -31,13 +32,20 @@ class tpvTest {
             else if(producto.equals(pan))
                 assertEquals("pan para bocadillos", producto.getDescripcion());
         }
-    }
 
-    @Test
-    void testPedir() {
-        testDespensa();
-        Ingrediente quesoB = new Ingrediente("queso", "queso en loncha", 7, 0.2);
-        Ingrediente panB = new Ingrediente("pan", "pan para bocadillos", 1.50, 1);
+        despensa.decrementarProducto(agua, 1);
+        for (Producto producto : despensa.getProductos()) {
+            if(producto.equals(agua))
+                assertEquals(19, producto.getCantidad());
+        }
+        despensa.incrementarProducto(agua, 1);
+        for (Producto producto : despensa.getProductos()) {
+            if(producto.equals(agua))
+                assertEquals(20, producto.getCantidad());
+        }
+
+        Ingrediente quesoB = new Ingrediente("queso", "queso en loncha", 7, 0);
+        Ingrediente panB = new Ingrediente("pan", "pan para bocadillos", 1.50, 0);
 
         //comprueba que el equals de los productos es correcto
         for (Producto producto : despensa.getProductos()) {
@@ -48,6 +56,13 @@ class tpvTest {
             else if(producto.getNombre().equals("queso"))
                 assertEquals(quesoB, producto);
         }
+    }
+
+    @Test
+    void testPedir() {
+        testDespensa();
+        Ingrediente quesoB = new Ingrediente("queso", "queso en loncha", 7, 0.2);
+        Ingrediente panB = new Ingrediente("pan", "pan para bocadillos", 1.50, 1);
 
         List<Producto> listaBocadillo = new ArrayList<>();
         listaBocadillo.add(quesoB);
@@ -62,18 +77,10 @@ class tpvTest {
 
         Comanda comanda = new Comanda(1, despensa);
         restaurante.addComanda(comanda);
-        assertTrue(comanda.pedir(bocadillo));
-        // comprobar que el stock baja
-        for (Producto producto : despensa.getProductos()) {
-            if(producto.equals(aguaM))
-                assertEquals(20, producto.getCantidad());
-            else if(producto.equals(panB))
-                assertEquals(4, producto.getCantidad());
-            else if(producto.equals(quesoB))
-                assertEquals(4.80, Math.round(producto.getCantidad() * 100.0) / 100.0);
-        }
 
+        assertTrue(comanda.pedir(bocadillo));
         assertTrue(comanda.pedir(menu));
+
         // comprobar que el stock baja
         for (Producto producto : despensa.getProductos()) {
             if(producto.equals(aguaM))
@@ -85,8 +92,28 @@ class tpvTest {
         }
 
     }
+
     @Test
-    void testCuentaPagar() {
+    void testCancelar() {
+        testDespensa();
+        Ingrediente quesoB = new Ingrediente("queso", "queso en loncha", 7, 0.2);
+        Ingrediente panB = new Ingrediente("pan", "pan para bocadillos", 1.50, 1);
+
+        List<Producto> listaBocadillo = new ArrayList<>();
+        listaBocadillo.add(quesoB);
+        listaBocadillo.add(panB);
+        ProductoMultiple bocadillo = new ProductoMultiple("bocadillo", "bocadillo de queso", listaBocadillo, 3.50, 0.10, 1);
+
+        Comanda comanda = new Comanda(1, despensa);
+        restaurante.addComanda(comanda);
+
+        assertTrue(comanda.pedir(bocadillo));
+        comanda.setEstado(Cancelado.getInstance());
+        assertNull(comanda.solicitarCuenta());
+    }
+
+    @Test
+    void testCuenta() {
         testPedir();
         Comanda comanda = restaurante.getComandas().get(0);
         String s =
@@ -102,33 +129,63 @@ class tpvTest {
                 "Total de impuestos 0.67" + "\n" +
                 "PVP impuestos 7.35";
         assertEquals(s, comanda.solicitarCuenta());
+    }
 
-        s =
-                "# Factura simplificada numero " +
+    @Test
+    void testImpagar() {
+        testPedir();
+        Comanda comanda = restaurante.getComandas().get(0);
+
+        comanda.setEstado(Impagado.getInstance());
+
+        ProductoIndividual agua = new ProductoIndividual("agua", "botella de 1 litro de agua", 1, 1);
+        assertFalse(comanda.pedir(agua));
+
+        String s =
+                        "# Mesa numero 1" + "\n" +
+                        "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
+                        "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
+                        "==============================================================" + "\n" +
+                        "bocadillo          1      3.15           3.47           3.47" + "\n" +
+                        "menu               2      3.53           3.88           7.76" + "\n" +
+                        "\n" +
+                        "# Pendiente de combro" + "\n" +
+                        "Total sin impuestos 6.68" + "\n" +
+                        "Total de impuestos 0.67" + "\n" +
+                        "PVP impuestos 7.35";
+        assertEquals(s, comanda.solicitarCuenta());
+    }
+
+    @Test
+    void testTarjeta() {
+        testCuenta();
+        Comanda comanda = restaurante.getComandas().get(0);
+
+        String s =
+                        "# Factura simplificada numero " +
                         (new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()))+ "\n" +
-                "# Mesa numero 1" + "\n" +
-                "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
-                "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
-                "==============================================================" + "\n" +
-                "bocadillo          1      3.15           3.47           3.47" + "\n" +
-                "menu               2      3.53           3.88           7.76" + "\n" +
-                "\n" +
-                "# Total" + "\n" +
-                "Total sin impuestos 6.68" + "\n" +
-                "Total de impuestos 0.67" + "\n" +
-                "PVP impuestos 7.35" + "\n" +
-                "\n" +
-                "# Forma de pago: Tarjeta" + "\n" +
-                "Descuento del 10.00%" + "\n" +
-                "Descuento 0.73" + "\n" +
-                "Total 6.61";
+                        "# Mesa numero 1" + "\n" +
+                        "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
+                        "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
+                        "==============================================================" + "\n" +
+                        "bocadillo          1      3.15           3.47           3.47" + "\n" +
+                        "menu               2      3.53           3.88           7.76" + "\n" +
+                        "\n" +
+                        "# Total" + "\n" +
+                        "Total sin impuestos 6.68" + "\n" +
+                        "Total de impuestos 0.67" + "\n" +
+                        "PVP impuestos 7.35" + "\n" +
+                        "\n" +
+                        "# Forma de pago: Tarjeta" + "\n" +
+                        "Descuento del 10.00%" + "\n" +
+                        "Descuento 0.73" + "\n" +
+                        "Total 6.61";
         assertEquals(s, comanda.pagar(new PagoTarjeta(), 0.10));
     }
     @Test
     void testEfectivo() {
-        testPedir();
+        testCuenta();
         Comanda comanda = restaurante.getComandas().get(0);
-        comanda.solicitarCuenta();
 
         String s =
                         "# Factura simplificada numero " +
@@ -153,9 +210,8 @@ class tpvTest {
     }
     @Test
     void testEfectivoDescuento() {
-        testPedir();
+        testCuenta();
         Comanda comanda = restaurante.getComandas().get(0);
-        comanda.solicitarCuenta();
 
         String s =
                         "# Factura simplificada numero " +
@@ -182,9 +238,8 @@ class tpvTest {
     }
     @Test
     void testCheque() {
-        testPedir();
+        testCuenta();
         Comanda comanda = restaurante.getComandas().get(0);
-        comanda.solicitarCuenta();
 
         String s =
                         "# Factura simplificada numero " +
@@ -207,9 +262,8 @@ class tpvTest {
     }
     @Test
     void testInvitado() {
-        testPedir();
+        testCuenta();
         Comanda comanda = restaurante.getComandas().get(0);
-        comanda.solicitarCuenta();
 
         String s =
                         "# Factura simplificada numero " +
@@ -233,7 +287,7 @@ class tpvTest {
 
     @Test
     void testCaja() {
-        testCuentaPagar();
+        testTarjeta();
         String s =
                 "# Cierre de caja" + "\n" +
                 "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
@@ -246,10 +300,5 @@ class tpvTest {
                 "Impuestos  0.67" + "\n" +
                 "Ingresos   6.01";
         assertEquals(s, restaurante.cerrarCaja());
-    }
-
-    @Test
-    void testGlobal() {
-        //mostrar por pantalla los outputs
     }
 }
