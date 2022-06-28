@@ -1,13 +1,8 @@
 package tpv;
 
 import org.junit.jupiter.api.Test;
-import tpv.metodosPago.PagoCheque;
-import tpv.metodosPago.PagoEfectivo;
-import tpv.metodosPago.PagoInvitacion;
-import tpv.metodosPago.PagoTarjeta;
-import tpv.productos.Ingrediente;
-import tpv.productos.ProductoIndividual;
-import tpv.productos.ProductoMultiple;
+import tpv.metodosPago.*;
+import tpv.productos.*;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -109,7 +104,8 @@ class tpvTest {
         assertEquals(s, comanda.solicitarCuenta());
 
         s =
-                "# Factura simplificada numero 0" + "\n" +
+                "# Factura simplificada numero " +
+                        (new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()))+ "\n" +
                 "# Mesa numero 1" + "\n" +
                 "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
                 "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
@@ -135,7 +131,8 @@ class tpvTest {
         comanda.solicitarCuenta();
 
         String s =
-                "# Factura simplificada numero 0" + "\n" +
+                        "# Factura simplificada numero " +
+                        (new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()))+ "\n" +
                         "# Mesa numero 1" + "\n" +
                         "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
                         "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
@@ -161,7 +158,8 @@ class tpvTest {
         comanda.solicitarCuenta();
 
         String s =
-                "# Factura simplificada numero 0" + "\n" +
+                        "# Factura simplificada numero " +
+                        (new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()))+ "\n" +
                         "# Mesa numero 1" + "\n" +
                         "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
                         "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
@@ -189,7 +187,8 @@ class tpvTest {
         comanda.solicitarCuenta();
 
         String s =
-                "# Factura simplificada numero 0" + "\n" +
+                        "# Factura simplificada numero " +
+                        (new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()))+ "\n" +
                         "# Mesa numero 1" + "\n" +
                         "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
                         "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
@@ -213,7 +212,8 @@ class tpvTest {
         comanda.solicitarCuenta();
 
         String s =
-                "# Factura simplificada numero 0" + "\n" +
+                        "# Factura simplificada numero " +
+                        (new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()))+ "\n" +
                         "# Mesa numero 1" + "\n" +
                         "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
                         "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
