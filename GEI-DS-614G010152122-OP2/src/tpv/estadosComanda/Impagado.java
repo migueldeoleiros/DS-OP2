@@ -24,4 +24,8 @@ public class Impagado implements Estado {
     public String pagar(Comanda c) {
         return metodoPago.pagar(c);
     }
+    @Override
+    public String pagar(Comanda c, double descuento) {
+        return metodoPago.pagar(c, descuento);
+    }
 }

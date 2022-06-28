@@ -9,6 +9,7 @@ public class PagoTarjeta implements MetodoPago {
         return null;
     }
 
+    @Override
     public String pagar(Comanda c, double descuento) {
         return null;
     }

@@ -22,9 +22,11 @@ public abstract class ProductoVenta extends Producto {
 
     @Override
     public String toString() {
-        return getNombre() + "\t" +
-                getCantidad() + "\t" +
-                getPrecio()+getPrecio()*impuestos + "\t" +
-                (getPrecio()+getPrecio()*impuestos)*getCantidad();
+        return String.format("%-10s%10.0f%10.2f%15.2f%15.2f",
+                getNombre(),
+                getCantidad(),
+                getPrecio(),
+                getPrecio()+getPrecio()*impuestos,
+                (getPrecio()+getPrecio()*impuestos)*getCantidad());
     }
 }

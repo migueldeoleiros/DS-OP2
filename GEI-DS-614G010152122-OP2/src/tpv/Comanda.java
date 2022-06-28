@@ -29,8 +29,13 @@ public class Comanda {
         return this.estado.solicitarCuenta(this);
     }
 
-    public String pagar(){
+    public String pagar(MetodoPago metodoPago){
+        this.estado.setMetodoPago(metodoPago);
         return this.estado.pagar(this);
+    }
+    public String pagar(MetodoPago metodoPago, double descuento){
+        this.estado.setMetodoPago(metodoPago);
+        return this.estado.pagar(this, descuento);
     }
 
     //getters y setters

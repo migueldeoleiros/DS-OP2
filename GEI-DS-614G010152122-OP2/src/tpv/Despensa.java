@@ -17,7 +17,7 @@ public class Despensa {
         this.productos.remove(producto);
     }
 
-    public boolean incrementarProducto(Producto producto, double cantidad){
+    public boolean incrementarProducto(Producto producto, float cantidad){
         for(Producto i : this.productos)
             if(Objects.equals(i, producto)){
                 i.setCantidad(i.getCantidad()+cantidad);
@@ -27,7 +27,7 @@ public class Despensa {
     }
 
     public boolean decrementarProducto(Producto producto, double cantidad) {
-        if(producto.getCantidad() == -1){
+        if(producto.getClass() == ProductoMultiple.class){
             for(Producto i :  ((ProductoMultiple) producto).getListaIngredientes())
                 if(!decrementarProducto(i, i.getCantidad() * cantidad)) return false;
             return true;

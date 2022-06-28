@@ -7,13 +7,13 @@ import java.util.List;
 public class ProductoMultiple extends ProductoVenta {
     private List<Producto> listaIngredientes;
 
-    public ProductoMultiple(String nombre, String descripcion, List<Producto> listaIngredentes, double precio, double impuestos) {
-        super(nombre, descripcion, precio, -1, impuestos);
+    public ProductoMultiple(String nombre, String descripcion, List<Producto> listaIngredentes, double precio, double impuestos, double cantidad) {
+        super(nombre, descripcion, precio, cantidad, impuestos);
         this.listaIngredientes = listaIngredentes;
         super.setPrecio(precio - (precio * super.getImpuestos()));
     }
-    public ProductoMultiple(String nombre, String descripcion, List<Producto> listaIngredentes, double descuento) {
-        super(nombre, descripcion, 0, -1, 0.10);
+    public ProductoMultiple(String nombre, String descripcion, List<Producto> listaIngredentes, double descuento, double cantidad) {
+        super(nombre, descripcion, 0, cantidad, 0.10);
         double precio = 0;
         for(Producto listaIngredente : listaIngredentes) {
             precio += (listaIngredente.getPrecio()-listaIngredente.getPrecio()*descuento);

@@ -1,11 +1,12 @@
 package tpv;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import tpv.metodosPago.PagoEfectivo;
 import tpv.productos.Ingrediente;
 import tpv.productos.ProductoIndividual;
 import tpv.productos.ProductoMultiple;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -59,16 +60,7 @@ class tpvTest {
         List<Producto> listaMenu = new ArrayList<>();
         listaMenu.add(bocadillo);
         listaMenu.add(aguaM);
-        ProductoMultiple menu = new ProductoMultiple("menu", "menu de bocadillo con agua", listaMenu, 0.85, 1);
-
-        for (Producto producto : despensa.getProductos()) {
-            if(producto.equals(aguaM))
-                assertEquals(20, producto.getCantidad());
-            else if(producto.equals(panB))
-                assertEquals(5, producto.getCantidad());
-            else if(producto.equals(quesoB))
-                assertEquals(5, producto.getCantidad());
-        }
+        ProductoMultiple menu = new ProductoMultiple("menu", "menu de bocadillo con agua", listaMenu, 0.15, 2);
 
         Comanda comanda = new Comanda(1, despensa);
         restaurante.addComanda(comanda);
@@ -80,24 +72,57 @@ class tpvTest {
             else if(producto.equals(panB))
                 assertEquals(4, producto.getCantidad());
             else if(producto.equals(quesoB))
-                assertEquals(4.8, producto.getCantidad());
+                assertEquals(4.80, Math.round(producto.getCantidad() * 100.0) / 100.0);
         }
 
         assertTrue(comanda.pedir(menu));
         // comprobar que el stock baja
         for (Producto producto : despensa.getProductos()) {
             if(producto.equals(aguaM))
-                assertEquals(19, producto.getCantidad());
+                assertEquals(18, producto.getCantidad());
             else if(producto.equals(panB))
-                assertEquals(3, producto.getCantidad());
+                assertEquals(2, producto.getCantidad());
             else if(producto.equals(quesoB))
-                assertEquals(4.6, producto.getCantidad());
+                assertEquals(4.40, Math.round(producto.getCantidad() * 100.0) / 100.0);
         }
 
     }
     @Test
-    void testCuenta() {
+    void testCuentaPagar() {
         testPedir();
-        assertEquals("", restaurante.getComandas().get(0).solicitarCuenta());
+        Comanda comanda = restaurante.getComandas().get(0);
+        String s =
+                "# Mesa numero 1" + "\n" +
+                "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
+                "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
+                "==============================================================" + "\n" +
+                "bocadillo          1      3.15           3.47           3.47" + "\n" +
+                "menu               2      3.53           3.88           7.76" + "\n" +
+                "\n" +
+                "# Pendiente de combro" + "\n" +
+                "Total sin impuestos 6.68" + "\n" +
+                "Total de impuestos 0.67" + "\n" +
+                "PVP impuestos 7.35";
+        assertEquals(s, comanda.solicitarCuenta());
+
+        s =
+                "# Factura simplificada numero 187472540" + "\n" +
+                "# Mesa numero 1" + "\n" +
+                "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
+                "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
+                "==============================================================" + "\n" +
+                "bocadillo          1      3.15           3.47           3.47" + "\n" +
+                "menu               2      3.53           3.88           7.76" + "\n" +
+                "\n" +
+                "# Total" + "\n" +
+                "Total sin impuestos 6.68" + "\n" +
+                "Total de impuestos 0.67" + "\n" +
+                "PVP impuestos 7.35" + "\n" +
+                "\n" +
+                "# Forma de pago:" + "\n" +
+                "Descuento del 10.00%" + "\n" +
+                "Descuento 0.73" + "\n" +
+                "Total 6.61";
+        assertEquals(s, comanda.pagar(new PagoEfectivo(), 0.10));
     }
 }
