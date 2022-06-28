@@ -1,6 +1,7 @@
 package tpv;
 
 import tpv.estadosComanda.Pedir;
+import tpv.metodosPago.PagoEfectivo;
 import tpv.productos.ProductoVenta;
 
 import java.util.ArrayList;
@@ -31,7 +32,15 @@ public class Comanda {
 
     public String pagar(MetodoPago metodoPago){
         this.estado.setMetodoPago(metodoPago);
-        return this.estado.pagar(this);
+        return this.estado.pagar(this, 0);
+    }
+    public String pagar(double efectivo){
+        this.estado.setMetodoPago(new PagoEfectivo());
+        return this.estado.pagar(this,0, efectivo);
+    }
+    public String pagar(double efectivo, double descuento){
+        this.estado.setMetodoPago(new PagoEfectivo());
+        return this.estado.pagar(this,descuento, efectivo);
     }
     public String pagar(MetodoPago metodoPago, double descuento){
         this.estado.setMetodoPago(metodoPago);

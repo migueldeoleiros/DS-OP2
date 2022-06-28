@@ -1,7 +1,9 @@
 package tpv;
 
 import org.junit.jupiter.api.Test;
+import tpv.metodosPago.PagoCheque;
 import tpv.metodosPago.PagoEfectivo;
+import tpv.metodosPago.PagoInvitacion;
 import tpv.metodosPago.PagoTarjeta;
 import tpv.productos.Ingrediente;
 import tpv.productos.ProductoIndividual;
@@ -125,6 +127,108 @@ class tpvTest {
                 "Descuento 0.73" + "\n" +
                 "Total 6.61";
         assertEquals(s, comanda.pagar(new PagoTarjeta(), 0.10));
+    }
+    @Test
+    void testEfectivo() {
+        testPedir();
+        Comanda comanda = restaurante.getComandas().get(0);
+        comanda.solicitarCuenta();
+
+        String s =
+                "# Factura simplificada numero 0" + "\n" +
+                        "# Mesa numero 1" + "\n" +
+                        "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
+                        "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
+                        "==============================================================" + "\n" +
+                        "bocadillo          1      3.15           3.47           3.47" + "\n" +
+                        "menu               2      3.53           3.88           7.76" + "\n" +
+                        "\n" +
+                        "# Total" + "\n" +
+                        "Total sin impuestos 6.68" + "\n" +
+                        "Total de impuestos 0.67" + "\n" +
+                        "PVP impuestos 7.35" + "\n" +
+                        "\n" +
+                        "# Forma de pago: Efectivo" + "\n" +
+                        "Total 7.35" + "\n" +
+                        "Entregado 10.00" + "\n" +
+                        "Devolucion 2.65";
+                assertEquals(s, comanda.pagar(10));
+    }
+    @Test
+    void testEfectivoDescuento() {
+        testPedir();
+        Comanda comanda = restaurante.getComandas().get(0);
+        comanda.solicitarCuenta();
+
+        String s =
+                "# Factura simplificada numero 0" + "\n" +
+                        "# Mesa numero 1" + "\n" +
+                        "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
+                        "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
+                        "==============================================================" + "\n" +
+                        "bocadillo          1      3.15           3.47           3.47" + "\n" +
+                        "menu               2      3.53           3.88           7.76" + "\n" +
+                        "\n" +
+                        "# Total" + "\n" +
+                        "Total sin impuestos 6.68" + "\n" +
+                        "Total de impuestos 0.67" + "\n" +
+                        "PVP impuestos 7.35" + "\n" +
+                        "\n" +
+                        "# Forma de pago: Efectivo" + "\n" +
+                        "Descuento del 10.00%" + "\n" +
+                        "Descuento 0.73" + "\n" +
+                        "Total 6.61" + "\n" +
+                        "Entregado 10.00" + "\n" +
+                        "Devolucion 3.39";
+        assertEquals(s, comanda.pagar(10,0.10));
+    }
+    @Test
+    void testCheque() {
+        testPedir();
+        Comanda comanda = restaurante.getComandas().get(0);
+        comanda.solicitarCuenta();
+
+        String s =
+                "# Factura simplificada numero 0" + "\n" +
+                        "# Mesa numero 1" + "\n" +
+                        "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
+                        "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
+                        "==============================================================" + "\n" +
+                        "bocadillo          1      3.15           3.47           3.47" + "\n" +
+                        "menu               2      3.53           3.88           7.76" + "\n" +
+                        "\n" +
+                        "# Total" + "\n" +
+                        "Total sin impuestos 6.68" + "\n" +
+                        "Total de impuestos 0.67" + "\n" +
+                        "PVP impuestos 7.35" + "\n" +
+                        "\n" +
+                        "# Forma de pago: Cheque regalo" + "\n" +
+                        "Total 7.35";
+        assertEquals(s, comanda.pagar(new PagoCheque()));
+    }
+    @Test
+    void testInvitado() {
+        testPedir();
+        Comanda comanda = restaurante.getComandas().get(0);
+        comanda.solicitarCuenta();
+
+        String s =
+                "# Factura simplificada numero 0" + "\n" +
+                        "# Mesa numero 1" + "\n" +
+                        "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
+                        "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
+                        "==============================================================" + "\n" +
+                        "bocadillo          1      3.15           3.47           3.47" + "\n" +
+                        "menu               2      3.53           3.88           7.76" + "\n" +
+                        "\n" +
+                        "# Total" + "\n" +
+                        "Total sin impuestos 6.68" + "\n" +
+                        "Total de impuestos 0.67" + "\n" +
+                        "PVP impuestos 7.35" + "\n" +
+                        "\n" +
+                        "# Forma de pago: Invitado" + "\n" +
+                        "Total 7.35";
+        assertEquals(s, comanda.pagar(new PagoInvitacion()));
     }
 
     @Test

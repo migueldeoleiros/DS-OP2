@@ -10,7 +10,7 @@ public interface Estado {
     default String solicitarCuenta(Comanda c){
         return null;
     }
-    default String pagar(Comanda c){
+    default String pagar(Comanda c, double descuento, double entregado) {
         return null;
     }
     default String pagar(Comanda c, double descuento){

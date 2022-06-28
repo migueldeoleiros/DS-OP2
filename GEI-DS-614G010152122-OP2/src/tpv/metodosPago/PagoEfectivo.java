@@ -8,9 +8,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PagoEfectivo implements MetodoPago {
-
     @Override
     public String pagar(Comanda c, double descuento) {
+        return null;
+    }
+
+    @Override
+    public String pagar(Comanda c, double descuento, double entregado) {
         StringBuilder output = new StringBuilder();
         float total=0;
         float totalNoImpuestos=0;
@@ -36,8 +40,9 @@ public class PagoEfectivo implements MetodoPago {
             output.append("Descuento del ").append(String.format("%.2f%%",descuento*100)).append("\n");
             output.append("Descuento ").append(String.format("%.2f",total*descuento)).append("\n");
         }
-        output.append("Total ").append(String.format("%.2f",total - total*descuento));
-        //TODO Entrega y devolucion
+        output.append("Total ").append(String.format("%.2f",total - total*descuento)).append("\n");
+        output.append("Entregado ").append(String.format("%.2f",entregado)).append("\n");
+        output.append("Devolucion ").append(String.format("%.2f",entregado-(total - total*descuento)));
 
         return output.toString();
     }
