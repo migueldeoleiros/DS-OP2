@@ -2,6 +2,7 @@ package tpv;
 
 import org.junit.jupiter.api.Test;
 import tpv.metodosPago.PagoEfectivo;
+import tpv.metodosPago.PagoTarjeta;
 import tpv.productos.Ingrediente;
 import tpv.productos.ProductoIndividual;
 import tpv.productos.ProductoMultiple;
@@ -119,11 +120,11 @@ class tpvTest {
                 "Total de impuestos 0.67" + "\n" +
                 "PVP impuestos 7.35" + "\n" +
                 "\n" +
-                "# Forma de pago:" + "\n" +
+                "# Forma de pago: Tarjeta" + "\n" +
                 "Descuento del 10.00%" + "\n" +
                 "Descuento 0.73" + "\n" +
                 "Total 6.61";
-        assertEquals(s, comanda.pagar(new PagoEfectivo(), 0.10));
+        assertEquals(s, comanda.pagar(new PagoTarjeta(), 0.10));
     }
 
     @Test

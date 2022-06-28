@@ -22,7 +22,7 @@ public class Impagado implements Estado {
 
     @Override
     public String pagar(Comanda c) {
-        return metodoPago.pagar(c);
+        return metodoPago.pagar(c,0);
     }
     @Override
     public String pagar(Comanda c, double descuento) {

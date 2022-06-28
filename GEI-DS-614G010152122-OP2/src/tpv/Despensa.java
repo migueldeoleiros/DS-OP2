@@ -27,6 +27,7 @@ public class Despensa {
     }
 
     public boolean decrementarProducto(Producto producto, double cantidad) {
+        //TODO pensar mejor forma de hacer esto
         if(producto.getClass() == ProductoMultiple.class){
             for(Producto i :  ((ProductoMultiple) producto).getListaIngredientes())
                 if(!decrementarProducto(i, i.getCantidad() * cantidad)) return false;
