@@ -106,7 +106,7 @@ class tpvTest {
         assertEquals(s, comanda.solicitarCuenta());
 
         s =
-                "# Factura simplificada numero 187472540" + "\n" +
+                "# Factura simplificada numero 0" + "\n" +
                 "# Mesa numero 1" + "\n" +
                 "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
                 "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
@@ -124,5 +124,27 @@ class tpvTest {
                 "Descuento 0.73" + "\n" +
                 "Total 6.61";
         assertEquals(s, comanda.pagar(new PagoEfectivo(), 0.10));
+    }
+
+    @Test
+    void testCaja() {
+        testCuentaPagar();
+        String s =
+                "# Cierre de caja" + "\n" +
+                "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
+                "Producto            Cantidad" + "\n" +
+                "============================" + "\n" +
+                "bocadillo               1" + "\n" +
+                "menu                    2" + "\n" +
+                "\n" +
+                "# Total    6.68" + "\n" +
+                "Impuestos  0.67" + "\n" +
+                "Ingresos   6.01";
+        assertEquals(s, restaurante.cerrarCaja());
+    }
+
+    @Test
+    void testGlobal() {
+        //mostrar por pantalla los outputs
     }
 }
