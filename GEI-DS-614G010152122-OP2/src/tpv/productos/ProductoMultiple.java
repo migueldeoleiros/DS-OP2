@@ -1,5 +1,6 @@
 package tpv.productos;
 
+import tpv.Despensa;
 import tpv.Producto;
 
 import java.util.List;
@@ -20,6 +21,14 @@ public class ProductoMultiple extends ProductoVenta {
         }
         super.setPrecio(precio);
         this.listaIngredientes = listaIngredentes;
+    }
+
+    @Override
+    public boolean decrementarProducto(Despensa despensa, double cantidad) {
+        for(Producto i :   this.listaIngredientes)
+            if(!i.decrementarProducto(despensa, i.getCantidad() * cantidad))
+                return false;
+        return true;
     }
 
     public List<Producto> getListaIngredientes() {

@@ -14,9 +14,9 @@ public class Pedir implements Estado {
 
     @Override
     public boolean pedir(Comanda c, ProductoVenta pedido) {
-        if(c.getDespensa().decrementarProducto(pedido, pedido.getCantidad())){
-            c.getPedidos().add(pedido);
-            return true;
+        if(pedido.decrementarProducto(c.getDespensa(), pedido.getCantidad())){
+                c.getPedidos().add(pedido);
+                return true;
         }
         return false;
     }

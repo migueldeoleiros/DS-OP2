@@ -15,6 +15,17 @@ public abstract class Producto {
         this.precio = precio;
     }
 
+    public boolean decrementarProducto(Despensa despensa, double cantidad) {
+        for(Producto i : despensa.getProductos())
+            if(i.equals(this)) {
+                if(i.getCantidad() - cantidad > 0){
+                    i.setCantidad(i.getCantidad() - cantidad);
+                    return true;
+                }else break;
+            }
+        return false;
+    }
+
     public String getNombre() {
         return nombre;
     }
