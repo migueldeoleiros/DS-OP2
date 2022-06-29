@@ -127,7 +127,32 @@ class tpvTest {
                 "# Pendiente de combro" + "\n" +
                 "Total sin impuestos 6.68" + "\n" +
                 "Total de impuestos 0.67" + "\n" +
-                "PVP impuestos 7.35";
+                "PVP total 7.35";
+        assertEquals(s, comanda.solicitarCuenta());
+    }
+
+    @Test
+    void testPedirTrasCuenta() {
+        testPedir();
+        Comanda comanda = restaurante.getComandas().get(0);
+        comanda.solicitarCuenta();
+
+        ProductoIndividual agua = new ProductoIndividual("agua", "botella de 1 litro de agua", 1, 1);
+        assertTrue(comanda.pedir(agua));
+
+        String s =
+                "# Mesa numero 1" + "\n" +
+                        "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
+                        "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
+                        "==============================================================" + "\n" +
+                        "bocadillo          1      3.15           3.47           3.47" + "\n" +
+                        "menu               2      3.53           3.88           7.76" + "\n" +
+                        "agua               1      1.00           1.10           1.10" + "\n" +
+                        "\n" +
+                        "# Pendiente de combro" + "\n" +
+                        "Total sin impuestos 7.68" + "\n" +
+                        "Total de impuestos 0.77" + "\n" +
+                        "PVP total 8.45";
         assertEquals(s, comanda.solicitarCuenta());
     }
 
@@ -152,7 +177,7 @@ class tpvTest {
                         "# Pendiente de combro" + "\n" +
                         "Total sin impuestos 6.68" + "\n" +
                         "Total de impuestos 0.67" + "\n" +
-                        "PVP impuestos 7.35";
+                        "PVP total 7.35";
         assertEquals(s, comanda.solicitarCuenta());
     }
 
@@ -174,7 +199,7 @@ class tpvTest {
                         "# Total" + "\n" +
                         "Total sin impuestos 6.68" + "\n" +
                         "Total de impuestos 0.67" + "\n" +
-                        "PVP impuestos 7.35" + "\n" +
+                        "PVP total 7.35" + "\n" +
                         "\n" +
                         "# Forma de pago: Tarjeta" + "\n" +
                         "Descuento del 10.00%" + "\n" +
@@ -200,7 +225,7 @@ class tpvTest {
                         "# Total" + "\n" +
                         "Total sin impuestos 6.68" + "\n" +
                         "Total de impuestos 0.67" + "\n" +
-                        "PVP impuestos 7.35" + "\n" +
+                        "PVP total 7.35" + "\n" +
                         "\n" +
                         "# Forma de pago: Efectivo" + "\n" +
                         "Total 7.35" + "\n" +
@@ -226,7 +251,7 @@ class tpvTest {
                         "# Total" + "\n" +
                         "Total sin impuestos 6.68" + "\n" +
                         "Total de impuestos 0.67" + "\n" +
-                        "PVP impuestos 7.35" + "\n" +
+                        "PVP total 7.35" + "\n" +
                         "\n" +
                         "# Forma de pago: Efectivo" + "\n" +
                         "Descuento del 10.00%" + "\n" +
@@ -254,7 +279,7 @@ class tpvTest {
                         "# Total" + "\n" +
                         "Total sin impuestos 6.68" + "\n" +
                         "Total de impuestos 0.67" + "\n" +
-                        "PVP impuestos 7.35" + "\n" +
+                        "PVP total 7.35" + "\n" +
                         "\n" +
                         "# Forma de pago: Cheque regalo" + "\n" +
                         "Total 7.35";
@@ -278,7 +303,7 @@ class tpvTest {
                         "# Total" + "\n" +
                         "Total sin impuestos 6.68" + "\n" +
                         "Total de impuestos 0.67" + "\n" +
-                        "PVP impuestos 7.35" + "\n" +
+                        "PVP total 7.35" + "\n" +
                         "\n" +
                         "# Forma de pago: Invitado" + "\n" +
                         "Total 7.35";

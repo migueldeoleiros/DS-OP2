@@ -28,7 +28,7 @@ public class PagoTarjeta implements MetodoPago {
         output.append("\n# Total\n");
         output.append("Total sin impuestos ").append(String.format("%.2f",totalNoImpuestos)).append("\n");
         output.append("Total de impuestos ").append(String.format("%.2f",total-totalNoImpuestos)).append("\n");
-        output.append("PVP impuestos ").append(String.format("%.2f",total)).append("\n");
+        output.append("PVP total ").append(String.format("%.2f",total)).append("\n");
 
         output.append("\n# Forma de pago: Tarjeta\n");
         if(descuento != 0){

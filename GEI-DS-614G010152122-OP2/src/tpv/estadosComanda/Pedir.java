@@ -39,7 +39,7 @@ public class Pedir implements Estado {
         output.append("\n# Pendiente de combro\n");
         output.append("Total sin impuestos ").append(String.format("%.2f",totalNoImpuestos)).append("\n");
         output.append("Total de impuestos ").append(String.format("%.2f",total-totalNoImpuestos)).append("\n");
-        output.append("PVP impuestos ").append(String.format("%.2f",total));
+        output.append("PVP total ").append(String.format("%.2f",total));
 
         c.setEstado(Cobro.getInstance());
         return output.toString();
