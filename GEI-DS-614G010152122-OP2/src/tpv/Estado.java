@@ -13,8 +13,5 @@ public interface Estado {
     default String pagar(Comanda c, double descuento, double entregado) {
         return null;
     }
-    default String pagar(Comanda c, double descuento){
-        return null;
-    }
     default void setMetodoPago(MetodoPago metodoPago){}
 }

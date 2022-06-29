@@ -48,9 +48,4 @@ public class Impagado implements Estado {
         c.setEstado(Cerrado.getInstance());
         return metodoPago.pagar(c, descuento, entregado);
     }
-    @Override
-    public String pagar(Comanda c, double descuento) {
-        c.setEstado(Cerrado.getInstance());
-        return metodoPago.pagar(c, descuento);
-    }
 }

@@ -8,10 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class PagoEfectivo implements MetodoPago {
-    @Override
-    public String pagar(Comanda c, double descuento) {
-        return null;
-    }
 
     @Override
     public String pagar(Comanda c, double descuento, double entregado) {

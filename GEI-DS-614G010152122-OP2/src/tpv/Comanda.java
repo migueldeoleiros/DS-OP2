@@ -32,7 +32,11 @@ public class Comanda {
 
     public String pagar(MetodoPago metodoPago){
         this.estado.setMetodoPago(metodoPago);
-        return this.estado.pagar(this, 0);
+        return this.estado.pagar(this, 0,0);
+    }
+    public String pagar(MetodoPago metodoPago, double descuento){
+        this.estado.setMetodoPago(metodoPago);
+        return this.estado.pagar(this, descuento, 0);
     }
     public String pagar(double efectivo){
         this.estado.setMetodoPago(new PagoEfectivo());
@@ -41,10 +45,6 @@ public class Comanda {
     public String pagar(double efectivo, double descuento){
         this.estado.setMetodoPago(new PagoEfectivo());
         return this.estado.pagar(this,descuento, efectivo);
-    }
-    public String pagar(MetodoPago metodoPago, double descuento){
-        this.estado.setMetodoPago(metodoPago);
-        return this.estado.pagar(this, descuento);
     }
 
     //getters y setters

@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class PagoInvitacion implements MetodoPago {
     @Override
-    public String pagar(Comanda c, double descuento) {
+    public String pagar(Comanda c, double descuento, double entregado) {
         StringBuilder output = new StringBuilder();
         float total=0;
         float totalNoImpuestos=0;
