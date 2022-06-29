@@ -121,13 +121,13 @@ class tpvTest {
                 "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
                 "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
                 "==============================================================" + "\n" +
-                "bocadillo          1      3.15           3.47           3.47" + "\n" +
-                "menu               2      3.53           3.88           7.76" + "\n" +
+                "bocadillo          1      3.50           3.85           3.85" + "\n" +
+                "menu               2      3.83           4.21           8.42" + "\n" +
                 "\n" +
                 "# Pendiente de combro" + "\n" +
-                "Total sin impuestos 6.68" + "\n" +
-                "Total de impuestos 0.67" + "\n" +
-                "PVP total 7.35";
+                "Total sin impuestos 7.32" + "\n" +
+                "Total de impuestos 0.73" + "\n" +
+                "PVP total 8.06";
         assertEquals(s, comanda.solicitarCuenta());
     }
 
@@ -145,14 +145,14 @@ class tpvTest {
                         "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
                         "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
                         "==============================================================" + "\n" +
-                        "bocadillo          1      3.15           3.47           3.47" + "\n" +
-                        "menu               2      3.53           3.88           7.76" + "\n" +
+                        "bocadillo          1      3.50           3.85           3.85" + "\n" +
+                        "menu               2      3.83           4.21           8.42" + "\n" +
                         "agua               1      1.00           1.10           1.10" + "\n" +
                         "\n" +
                         "# Pendiente de combro" + "\n" +
-                        "Total sin impuestos 7.68" + "\n" +
-                        "Total de impuestos 0.77" + "\n" +
-                        "PVP total 8.45";
+                        "Total sin impuestos 8.32" + "\n" +
+                        "Total de impuestos 0.83" + "\n" +
+                        "PVP total 9.16";
         assertEquals(s, comanda.solicitarCuenta());
     }
 
@@ -171,13 +171,13 @@ class tpvTest {
                         "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
                         "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
                         "==============================================================" + "\n" +
-                        "bocadillo          1      3.15           3.47           3.47" + "\n" +
-                        "menu               2      3.53           3.88           7.76" + "\n" +
+                        "bocadillo          1      3.50           3.85           3.85" + "\n" +
+                        "menu               2      3.83           4.21           8.42" + "\n" +
                         "\n" +
                         "# Pendiente de combro" + "\n" +
-                        "Total sin impuestos 6.68" + "\n" +
-                        "Total de impuestos 0.67" + "\n" +
-                        "PVP total 7.35";
+                        "Total sin impuestos 7.32" + "\n" +
+                        "Total de impuestos 0.73" + "\n" +
+                        "PVP total 8.06";
         assertEquals(s, comanda.solicitarCuenta());
     }
 
@@ -193,18 +193,18 @@ class tpvTest {
                         "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
                         "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
                         "==============================================================" + "\n" +
-                        "bocadillo          1      3.15           3.47           3.47" + "\n" +
-                        "menu               2      3.53           3.88           7.76" + "\n" +
+                        "bocadillo          1      3.50           3.85           3.85" + "\n" +
+                        "menu               2      3.83           4.21           8.42" + "\n" +
                         "\n" +
                         "# Total" + "\n" +
-                        "Total sin impuestos 6.68" + "\n" +
-                        "Total de impuestos 0.67" + "\n" +
-                        "PVP total 7.35" + "\n" +
+                        "Total sin impuestos 7.32" + "\n" +
+                        "Total de impuestos 0.73" + "\n" +
+                        "PVP total 8.06" + "\n" +
                         "\n" +
                         "# Forma de pago: Tarjeta" + "\n" +
                         "Descuento del 10.00%" + "\n" +
-                        "Descuento 0.73" + "\n" +
-                        "Total 6.61";
+                        "Descuento 0.81" + "\n" +
+                        "Total 7.25";
         assertEquals(s, comanda.pagar(new PagoTarjeta(), 0.10));
     }
     @Test
@@ -219,18 +219,18 @@ class tpvTest {
                         "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
                         "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
                         "==============================================================" + "\n" +
-                        "bocadillo          1      3.15           3.47           3.47" + "\n" +
-                        "menu               2      3.53           3.88           7.76" + "\n" +
+                        "bocadillo          1      3.50           3.85           3.85" + "\n" +
+                        "menu               2      3.83           4.21           8.42" + "\n" +
                         "\n" +
-                        "# Total" + "\n" +
-                        "Total sin impuestos 6.68" + "\n" +
-                        "Total de impuestos 0.67" + "\n" +
-                        "PVP total 7.35" + "\n" +
+                                "# Total" + "\n" +
+                        "Total sin impuestos 7.32" + "\n" +
+                        "Total de impuestos 0.73" + "\n" +
+                        "PVP total 8.06" + "\n" +
                         "\n" +
                         "# Forma de pago: Efectivo" + "\n" +
-                        "Total 7.35" + "\n" +
+                        "Total 8.06" + "\n" +
                         "Entregado 10.00" + "\n" +
-                        "Devolucion 2.65";
+                        "Devolucion 1.94";
                 assertEquals(s, comanda.pagar(10));
     }
     @Test
@@ -245,20 +245,20 @@ class tpvTest {
                         "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
                         "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
                         "==============================================================" + "\n" +
-                        "bocadillo          1      3.15           3.47           3.47" + "\n" +
-                        "menu               2      3.53           3.88           7.76" + "\n" +
+                        "bocadillo          1      3.50           3.85           3.85" + "\n" +
+                        "menu               2      3.83           4.21           8.42" + "\n" +
                         "\n" +
-                        "# Total" + "\n" +
-                        "Total sin impuestos 6.68" + "\n" +
-                        "Total de impuestos 0.67" + "\n" +
-                        "PVP total 7.35" + "\n" +
+                                "# Total" + "\n" +
+                        "Total sin impuestos 7.32" + "\n" +
+                        "Total de impuestos 0.73" + "\n" +
+                        "PVP total 8.06" + "\n" +
                         "\n" +
                         "# Forma de pago: Efectivo" + "\n" +
                         "Descuento del 10.00%" + "\n" +
-                        "Descuento 0.73" + "\n" +
-                        "Total 6.61" + "\n" +
+                        "Descuento 0.81" + "\n" +
+                        "Total 7.25" + "\n" +
                         "Entregado 10.00" + "\n" +
-                        "Devolucion 3.39";
+                        "Devolucion 2.75";
         assertEquals(s, comanda.pagar(10,0.10));
     }
     @Test
@@ -273,16 +273,16 @@ class tpvTest {
                         "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
                         "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
                         "==============================================================" + "\n" +
-                        "bocadillo          1      3.15           3.47           3.47" + "\n" +
-                        "menu               2      3.53           3.88           7.76" + "\n" +
+                        "bocadillo          1      3.50           3.85           3.85" + "\n" +
+                        "menu               2      3.83           4.21           8.42" + "\n" +
                         "\n" +
-                        "# Total" + "\n" +
-                        "Total sin impuestos 6.68" + "\n" +
-                        "Total de impuestos 0.67" + "\n" +
-                        "PVP total 7.35" + "\n" +
+                                "# Total" + "\n" +
+                        "Total sin impuestos 7.32" + "\n" +
+                        "Total de impuestos 0.73" + "\n" +
+                        "PVP total 8.06" + "\n" +
                         "\n" +
                         "# Forma de pago: Cheque regalo" + "\n" +
-                        "Total 7.35";
+                        "Total 8.06";
         assertEquals(s, comanda.pagar(new PagoCheque()));
     }
     @Test
@@ -297,16 +297,16 @@ class tpvTest {
                         "# " + (new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()))+ "\n" +
                         "Producto	 Cantidad 	 Precio 	 PVP unidad 	 PVP total" + "\n" +
                         "==============================================================" + "\n" +
-                        "bocadillo          1      3.15           3.47           3.47" + "\n" +
-                        "menu               2      3.53           3.88           7.76" + "\n" +
+                        "bocadillo          1      3.50           3.85           3.85" + "\n" +
+                        "menu               2      3.83           4.21           8.42" + "\n" +
                         "\n" +
-                        "# Total" + "\n" +
-                        "Total sin impuestos 6.68" + "\n" +
-                        "Total de impuestos 0.67" + "\n" +
-                        "PVP total 7.35" + "\n" +
+                                "# Total" + "\n" +
+                        "Total sin impuestos 7.32" + "\n" +
+                        "Total de impuestos 0.73" + "\n" +
+                        "PVP total 8.06" + "\n" +
                         "\n" +
                         "# Forma de pago: Invitado" + "\n" +
-                        "Total 7.35";
+                        "Total 8.06";
         assertEquals(s, comanda.pagar(new PagoInvitacion()));
     }
 
@@ -321,9 +321,9 @@ class tpvTest {
                 "bocadillo               1" + "\n" +
                 "menu                    2" + "\n" +
                 "\n" +
-                "# Total    6.68" + "\n" +
-                "Impuestos  0.67" + "\n" +
-                "Ingresos   6.01";
+                "# Total    7.32" + "\n" +
+                "Impuestos  0.73" + "\n" +
+                "Ingresos   6.59";
         assertEquals(s, restaurante.cerrarCaja());
     }
 }
