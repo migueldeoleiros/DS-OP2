@@ -15,6 +15,12 @@ public abstract class Producto {
         this.precio = precio;
     }
 
+    /**
+     * Decrementa en la despensa dada una cantidad los ingredientes del producto
+     * @param despensa
+     * @param cantidad
+     * @return true si se lleva a cabo correctamente
+     */
     public boolean decrementarProducto(Despensa despensa, double cantidad) {
         for(Producto i : despensa.getProductos())
             if(i.equals(this)) {

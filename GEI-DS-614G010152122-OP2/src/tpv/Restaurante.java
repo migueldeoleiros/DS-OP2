@@ -16,10 +16,19 @@ public class Restaurante {
         this.comandas = new ArrayList<>();
     }
 
+    /**
+     * Introduce una nueva comanda a la lista de comandas
+     * @param comanda que introducir en la lista
+     */
     public void addComanda(Comanda comanda) {
         this.comandas.add(comanda);
     }
 
+    /**
+     * Cuenta cuantas veces se ha pedido un producto entre todas las comandas
+     * @param producto a contar
+     * @return cantidad de producto
+     */
     private int getCantidad(String producto){
         int cantidad=0;
         for (Comanda comanda : this.comandas) {
@@ -31,6 +40,11 @@ public class Restaurante {
         return cantidad;
     }
 
+    /**
+     * Borra de lista de comandas y retorna un informe de los productos
+     * y ganancias desde el ultimo cierre
+     * @return informe
+     */
     public String cerrarCaja() {
         StringBuilder output = new StringBuilder();
         float total=0;
@@ -59,6 +73,7 @@ public class Restaurante {
                 "Impuestos ",impuestos,
                 "Ingresos ",total-impuestos));
 
+        this.comandas = new ArrayList<>();
         return output.toString();
     }
 
