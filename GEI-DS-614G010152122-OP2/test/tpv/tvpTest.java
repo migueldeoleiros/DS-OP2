@@ -33,12 +33,12 @@ class tpvTest {
                 assertEquals("pan para bocadillos", producto.getDescripcion());
         }
 
-        despensa.decrementarProducto(agua, 1);
+        assertTrue(despensa.decrementarProducto(agua, 1));
         for (Producto producto : despensa.getProductos()) {
             if(producto.equals(agua))
                 assertEquals(19, producto.getCantidad());
         }
-        despensa.incrementarProducto(agua, 1);
+        assertTrue(despensa.incrementarProducto(agua, 1));
         for (Producto producto : despensa.getProductos()) {
             if(producto.equals(agua))
                 assertEquals(20, producto.getCantidad());

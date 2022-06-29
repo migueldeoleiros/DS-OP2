@@ -71,7 +71,4 @@ public class Restaurante {
     public List<Comanda> getComandas() {
         return comandas;
     }
-    public void setComandas(List<Comanda> comandas) {
-        this.comandas = comandas;
-    }
 }

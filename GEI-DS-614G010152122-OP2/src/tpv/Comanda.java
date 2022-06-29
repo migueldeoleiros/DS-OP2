@@ -9,8 +9,8 @@ import java.util.List;
 
 public class Comanda {
     private int mesa;
-    private Despensa despensa;
-    private List<ProductoVenta> pedidos = new ArrayList<>();
+    private final Despensa despensa;
+    private final List<ProductoVenta> pedidos = new ArrayList<>();
     private Estado estado = Pedir.getInstance();
 
     public Comanda(int mesa, Despensa despensa) {
@@ -57,13 +57,7 @@ public class Comanda {
     public Despensa getDespensa() {
         return despensa;
     }
-    public void setDespensa(Despensa despensa) {
-        this.despensa = despensa;
-    }
     public List<ProductoVenta> getPedidos() {
         return pedidos;
-    }
-    public void setPedidos(List<ProductoVenta> pedidos) {
-        this.pedidos = pedidos;
     }
 }

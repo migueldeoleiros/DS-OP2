@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Despensa {
-    private List<Producto> productos = new ArrayList<>();
+    private final List<Producto> productos = new ArrayList<>();
 
     public void addProducto(Producto producto){
         this.productos.add(producto);
