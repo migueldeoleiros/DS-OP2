@@ -17,16 +17,22 @@ Sigo este principio para los estados de Comanda y para los métodos de pago, sie
 Usé este patrón para representar los tipos de **Producto** \\
 Ya que los productos pueden ser individuales o múltiples y los múltiples contienen una lista de productos, el patrón composición es perfecto
 ### Diagrama de clases
+![image](ClassDiagramComposicion.png)
 ### Diagrama dinámico de secuencia 
+![image](ProductoMultipleSecuencia.png)
 
 ## Patrón Estado
 Usé este patrón para representar las diferentes fases de la **Comanda** \\
 Trato a las diferentes fases de una comanda como *Estados* en los que se puede encontrar, derivando los métodos a la interfaz **Estado** que actuará diferente dependiendo de su implementación (si está en fase de cobro, pedir, etc.)
 ### Diagrama de clases
+![image](ClassDiagramEstado.png)
 ### Diagrama dinámico de estados 
+![image](StateDiagram.png)
 
 ## Patrón Estrategia
 Usé este patrón para los diferentes tipos de **Metodo de pago** \\
 Para seguir el principio de encapsular lo que varía y responsabilidad única, separo el método de pago en una interfaz que permite variar el método o crear núevas formas de pago sin modificar el código de todos los *estados* que lo implementan.
 ### Diagrama de clases
+![image](ClassDiagramEstrategia.png)
 ### Diagrama dinámico de secuencia 
+![image](PagoEfectivoSecuencia.png)
